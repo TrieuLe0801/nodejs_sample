@@ -23,4 +23,5 @@
 hs_err_pid*
 
 #folder
-/nodes_modules/*
+/node_modules/*
+node_modules/puppeteer/.local-chromium/linux-579032/chrome-linux/chrome
