@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "puppeteer": "^1.7.0",
+    "puppeteer": "^1.20.0",
     "readline-sync": "^1.4.10",
     "utf-8-validate": "^5.0.2"
   },
