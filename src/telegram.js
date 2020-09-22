@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const config = require('/home/trieulv/nodejs/src/config.json');
-const cookies = require('/home/trieulv/nodejs/src/cookies.json');
+const config = require('./src/config.json');
+const cookies = require('./src/cookies.json');
 const readline = require('readline-sync');
 
 (async () => {
@@ -60,18 +60,23 @@ const readline = require('readline-sync');
          
             await page.waitForSelector('[ng-click="buttonClick(button)"]');
             console.log("Load the message");
-            await page.click('[ng-click="buttonClick(button)"]');
-            console.log("clicked");
+
             await page.waitFor(15000);
 
         try{   
             await page.waitFor('[ng-click="buttonClick(button)"]');
-            console.log("Load again");
-            
-            
+            var  i = 0
+            //var datetime = new Date().toLocaleString();
+            while (i < 101){
+                var datetime = new Date().toLocaleString();
+                await page.click('[ng-click="buttonClick(button)"]');
+                i++;
+                console.log("clicked "+i+"at "+datetime);
+                await page.waitFor(30999);
+            }
+            await page.close();
+            console.log("Stop account");
             // await page.waitFor(30000);
-            
-
         }catch(error){
             console.log(error);
             process.exit(0);
@@ -79,7 +84,7 @@ const readline = require('readline-sync');
 
         let currentCookies = await page.cookies();
 
-        fs.writeFileSync('/home/trieulv/nodejs/src/cookies.json', JSON.stringify(currentCookies));
+        fs.writeFileSync('./src/cookies.json', JSON.stringify(currentCookies));
 
     }
 
