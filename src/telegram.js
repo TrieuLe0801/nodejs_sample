@@ -13,8 +13,11 @@ const readline = require('readline-sync');
         await page.setCookie(...cookies);
         await page.goto(url, {waitUntil: 'networkidle2'});
     }else{
-        try{   
+        
             await page.goto(url, {waitUntil: 'networkidle2'});
+
+            // Login
+            // Load and change phone code
             await page.waitFor('[ng-model="credentials.phone_country"]');
             const inputValue = await page.$eval('[ng-model="credentials.phone_country"]', el => el.value);
             console.log(inputValue);
@@ -26,19 +29,22 @@ const readline = require('readline-sync');
                 console.log("Changed the phone code");
             }
             
+            // Type phone number
             await page.type('[name="phone_number"]', config.phone_number, {delay: 30});
             console.log('Enter phone number: '+config.phone_number);
-
             await page.waitFor(5000);
+
+            // Click submit button 
             await page.click('[class="login_head_submit_btn"]');
             console.log('Access phone number: '+config.phone_number);
 
+            // Load dialog alert
             await page.waitFor('[class="modal-dialog"]');
             console.log('loaded dialog');
-
             await page.waitFor(5000);
             await page.click('[class="btn btn-md btn-md-primary"]');
 
+            // Insert confirm code from keyboard
             var codeConfirm = "";
             await page.waitFor(5000);
             codeConfirm = readline.question(`Enter the code: \n`);
@@ -51,12 +57,16 @@ const readline = require('readline-sync');
             await page.goto(bot_url, {waitUntil: 'networkidle2'});
             console.log("access bot");
 
-            await page.waitFor('[ng-switch-default class = "btn reply_markup_button"]');
-            await page.click('[ng-switch-default class = "btn reply_markup_button"]');
-            console.log("Clicked ");
+         
+            await page.waitForSelector('[ng-click="buttonClick(button)"]');
+            console.log("Load the message");
+            await page.click('[ng-click="buttonClick(button)"]');
+            console.log("clicked");
+            await page.waitFor(15000);
 
-            await page.waitForNavigation();
-
+        try{   
+            await page.waitFor('[ng-click="buttonClick(button)"]');
+            console.log("Load again");
             
             
             // await page.waitFor(30000);
