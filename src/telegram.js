@@ -1,8 +1,12 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const config = require('../src/config.json');
-const cookies = require('../src/cookies.json');
+// const config = require('../src/config.json');
+// const cookies = require('../src/cookies.json');
+const cookies ="";
 const readline = require('readline-sync');
+const phoneCode = readline.question(`Enter the phone code: \n`);
+const phoneNumber = readline.question(`Enter the phone number: \n`);
+const intervalLoop = readline.question(`Enter the interval time to loops (suggest under 600 times): \n`);
 
 (async () => {
     let url = 'https://web.telegram.org/#';
@@ -21,22 +25,22 @@ const readline = require('readline-sync');
             await page.waitFor('[ng-model="credentials.phone_country"]');
             const inputValue = await page.$eval('[ng-model="credentials.phone_country"]', el => el.value);
             console.log(inputValue);
-            if (inputValue.toString()!=='+84'){
+            if (inputValue.toString()!==phoneCode){
                 await page.evaluate(function() {
                     document.querySelector('[ng-model="credentials.phone_country"]').value = ''
                 })
-                await page.type('[ng-model="credentials.phone_country"]', config.phone_code, {delay: 30});
+                await page.type('[ng-model="credentials.phone_country"]', phoneCode, {delay: 30});
                 console.log("Changed the phone code");
             }
             
             // Type phone number
-            await page.type('[name="phone_number"]', config.phone_number, {delay: 30});
-            console.log('Enter phone number: '+config.phone_number);
+            await page.type('[name="phone_number"]', phoneNumber, {delay: 30});
+            console.log('Enter phone number: '+phoneNumber);
             await page.waitFor(5000);
 
             // Click submit button 
             await page.click('[class="login_head_submit_btn"]');
-            console.log('Access phone number: '+config.phone_number);
+            console.log('Access phone number: '+phoneNumber);
 
             // Load dialog alert
             await page.waitFor('[class="modal-dialog"]');
@@ -63,7 +67,7 @@ const readline = require('readline-sync');
             console.log("Load the message");
 
             // Wait before auto click
-            await page.waitFor(15000);
+            // await page.waitFor(15000);
 
         try{   
             await page.waitFor('[ng-click="buttonClick(button)"]');
@@ -75,12 +79,12 @@ const readline = require('readline-sync');
                         datetime = new Date().toLocaleString();
                         i++;
                         console.log("clicked "+i+" at "+datetime);
-                        if(i === 80){
-                            clearInterval(interval);
+                        if(i === intervalLoop){
+                            clearInterval(interval); 
+                            page.close();
+                            console.log("Thank you and See you!");
+                            process.exit(0);
                         }
-                    })
-                    .catch((e) => {
-                        console.log("Just to quickly!!! But it's still running!");
                     });
             }, 30999);
         }catch(error){
@@ -88,9 +92,9 @@ const readline = require('readline-sync');
             process.exit(0);
         }
 
-        let currentCookies = await page.cookies();
+        // let currentCookies = await page.cookies();
 
-        fs.writeFileSync('../src/cookies.json', JSON.stringify(currentCookies));
+        // fs.writeFileSync('../src/cookies.json', JSON.stringify(currentCookies));
 
     }
 
