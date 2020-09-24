@@ -18,3 +18,4 @@ $ npm install
 $ node src/telegram.js
 ```
 # ENJOY YOUR BOT
+![Image of bot](https://github.com/TrieuLe0801/nodejs_sample/blob/master/image.png)
