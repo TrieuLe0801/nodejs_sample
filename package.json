@@ -2,7 +2,7 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "simple node.js app",
-  "main": "(app.js)",
+  "main": "telegram.js",
   "scripts": {
     "start": "node telegram.js"
   },
