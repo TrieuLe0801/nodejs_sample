@@ -6,7 +6,8 @@ const cookies ="";
 const readline = require('readline-sync');
 const phoneCode = readline.question(`Enter the phone code: \n`);
 const phoneNumber = readline.question(`Enter the phone number: \n`);
-const intervalLoop = readline.question(`Enter the interval time to loops (suggest under 600 times): \n`);
+const intervalLoop = parseInt(readline.question(`Enter the interval time to loops (suggest under 600 times): \n`));
+
 
 (async () => {
     let url = 'https://web.telegram.org/#';
