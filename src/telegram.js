@@ -8,7 +8,6 @@ const phoneCode = readline.question(`Enter the phone code: \n`);
 const phoneNumber = readline.question(`Enter the phone number: \n`);
 const intervalLoop = parseInt(readline.question(`Enter the interval time to loops (suggest under 600 times): \n`));
 
-
 (async () => {
     let url = 'https://web.telegram.org/#';
     let browser = await puppeteer.launch({headless: false});
@@ -83,7 +82,8 @@ const intervalLoop = parseInt(readline.question(`Enter the interval time to loop
                         if(i === intervalLoop){
                             clearInterval(interval); 
                             page.close();
-                            console.log("Thank you and See you!");
+                            console.log("App closed!")
+                            console.log("Thank you for using and See you!");
                             process.exit(0);
                         }
                     });
