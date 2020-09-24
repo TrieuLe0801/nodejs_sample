@@ -4,7 +4,7 @@
   "description": "simple node.js app",
   "main": "telegram.js",
   "scripts": {
-    "start": "node telegram.js"
+    "start": "node src/telegram.js"
   },
   "dependencies": {
     "bufferutil": "^4.0.1",
