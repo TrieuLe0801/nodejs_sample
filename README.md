@@ -1,6 +1,6 @@
 # nodejs_sample
 Sample nodejs bot to access telegram and run BTC BOT
-# Installation for Windows 10
+## Installation for Windows 10
 You should install Git and Node.js before clone the project:
 - Install git for Windows [Git](https://git-scm.com/download/win)
 - Install Node.js for Windows [Node.js](https://nodejs.org/en/download/) (Select LTS and choose Windows Installer)
@@ -17,3 +17,4 @@ $ cd nodejs_sample
 $ npm install
 $ node src/telegram.js
 ```
+# ENJOY YOUR BOT
