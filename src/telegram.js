@@ -58,7 +58,7 @@ const intervalLoop = parseInt(readline.question(`Enter the interval time to loop
             await page.waitForNavigation();
 
             // Access the bot
-            const bot_url = 'https://web.telegram.org/#/im?p=@BTC_Ads_sg_bot';
+            const bot_url = config.telegram_bot;
             await page.goto(bot_url, {waitUntil: 'networkidle2'});
             console.log("Access bot");
 
