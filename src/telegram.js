@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-// const config = require('../src/config.json');
+const config = require('../src/config.json');
 // const cookies = require('../src/cookies.json');
 const cookies ="";
 const readline = require('readline-sync');
@@ -9,7 +9,7 @@ const phoneNumber = readline.question(`Enter the phone number: \n`);
 const intervalLoop = parseInt(readline.question(`Enter the interval time to loops (suggest under 600 times): \n`));
 
 (async () => {
-    let url = 'https://web.telegram.org/#';
+    let url = config.telegram;
     let browser = await puppeteer.launch({headless: false});
     let page = await browser.newPage();
 
