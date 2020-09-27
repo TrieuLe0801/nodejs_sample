@@ -1,4 +1,6 @@
 {
     "phone_number":"Your phone number",
-    "phone_code":"Your phone code"
+    "phone_code":"Your phone code",
+    "telegram":"https://web.telegram.org/#",
+    "telegram_bot":""
 }
